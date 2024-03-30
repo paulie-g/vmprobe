@@ -45,7 +45,7 @@ _take_mincore(path_sv, total_files_sv, total_pages_sv)
             sv_setuv(total_files_sv, b.total_files_crawled);
             output = newSVpvn(b.buf.data(), b.buf.size());
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = output;
@@ -108,7 +108,7 @@ _take_pagemap(path_sv, bits_sv, total_files_sv, total_pages_sv)
                 av_push(results_av, newSVpv(snap.data(), snap.size()));
             }
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = newRV((SV *)results_av);;
@@ -137,7 +137,7 @@ restore(path_sv, snapshot_sv)
         try {
             vmprobe::cache::snapshot::restore(path, snapshot_p, snapshot_len);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
 
@@ -163,7 +163,7 @@ summarize(snapshot_sv, buckets)
         try {
             vmprobe::cache::snapshot::summary::summarize(snapshot_p, snapshot_len, s);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         for (auto &bucket : s.back().buckets) {
@@ -203,7 +203,7 @@ popcount(snapshot_sv)
 
             num_resident = p.popcount();
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = num_resident;
@@ -261,7 +261,7 @@ parse_records(snapshot_sv, num_buckets, limit)
                 av_push(results, newRV((SV *)rh));
             }
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = newRV((SV *)results);
@@ -294,7 +294,7 @@ delta(before_sv, after_sv)
 
             output = newSVpvn(b.buf.data(), b.buf.size());
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = output;
@@ -327,7 +327,7 @@ union(a_sv, b_sv)
 
             output = newSVpvn(b.buf.data(), b.buf.size());
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = output;
@@ -360,7 +360,7 @@ intersection(a_sv, b_sv)
 
             output = newSVpvn(b.buf.data(), b.buf.size());
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = output;
@@ -393,7 +393,7 @@ subtract(a_sv, b_sv)
 
             output = newSVpvn(b.buf.data(), b.buf.size());
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n",e.what());
         }
 
         RETVAL = output;

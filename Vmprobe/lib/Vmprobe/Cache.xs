@@ -16,11 +16,7 @@ extern "C" {
 #include "cache.h"
 
 
-
-
 typedef vmprobe::cache::lock_context * Vmprobe_Cache_LockContext;
-
-
 
 
 MODULE = Vmprobe::Cache        PACKAGE = Vmprobe::Cache
@@ -43,7 +39,7 @@ touch(path_sv)
         try {
             vmprobe::cache::touch(path);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n", e.what());
         }
 
 
@@ -64,7 +60,7 @@ touch_page_range(path_sv, start_page, end_page)
         try {
             vmprobe::cache::touch(path, start_page, end_page);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n", e.what());
         }
 
 
@@ -84,7 +80,7 @@ evict(path_sv)
         try {
             vmprobe::cache::evict(path);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n", e.what());
         }
 
 
@@ -105,7 +101,7 @@ evict_page_range(path_sv, start_page, end_page)
         try {
             vmprobe::cache::evict(path, start_page, end_page);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n", e.what());
         }
 
 
@@ -130,7 +126,7 @@ lock_page_range(path_sv, start_page, end_page)
         try {
             l = vmprobe::cache::lock(path, start_page, end_page);
         } catch(std::runtime_error &e) {
-            croak(e.what());
+            croak("%s\n", e.what());
         }
 
         RETVAL = l;
@@ -147,3 +143,4 @@ DESTROY(l)
         Vmprobe_Cache_LockContext l
     CODE:
         delete l;
+

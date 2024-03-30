@@ -5,6 +5,7 @@
 #include <functional>
 #include <unordered_map>
 #include <unordered_set>
+#include <cstdint>
 
 #include <sys/types.h>
 #include <sys/stat.h>

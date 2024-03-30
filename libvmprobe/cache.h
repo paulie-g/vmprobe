@@ -1,5 +1,6 @@
 #include <string>
 #include <functional>
+#include <cstdint>
 
 #include "file.h"
 
